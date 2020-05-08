@@ -12,6 +12,12 @@ namespace langutil {
         Node *parent;
         std::vector<std::shared_ptr<Node>> children;
 
+        virtual void verify() {
+            for (const auto &child : children) {
+                child.verify();
+            }
+        }
+
         Node *searchThis(const std::function<bool(Node *)> &checker) {
             for (std::shared_ptr<Node> &child : children) {
                 if (checker(child.get()))

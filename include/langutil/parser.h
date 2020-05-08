@@ -20,7 +20,7 @@ namespace langutil {
         std::vector<char> symbols;
 
         static std::vector<char> defaultSymbols();
-        
+
         int getIndex();
         std::string getText();
 
