@@ -14,7 +14,7 @@ namespace langutil {
 
         virtual void verify() {
             for (const auto &child : children) {
-                child.verify();
+                child->verify();
             }
         }
 
@@ -22,6 +22,8 @@ namespace langutil {
             for (std::shared_ptr<Node> &child : children) {
                 if (checker(child.get()))
                     return child.get();
+
+                child->searchThis(checker);
             }
 
             return nullptr;
@@ -39,6 +41,18 @@ namespace langutil {
             Node *parentSearch = parent->searchParent(checker);
             if (parentSearch)
                 return parentSearch;
+
+            return nullptr;
+        }
+
+        Node *searchScope(const std::function<bool(Node *)> &checker) {
+            if (!parent)
+                return nullptr;
+
+            for (const std::shared_ptr<Node> &child : parent->children) {
+                if (checker(child.get()))
+                    return child.get();
+            }
 
             return nullptr;
         }
