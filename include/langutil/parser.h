@@ -5,13 +5,13 @@
 
 namespace langutil {
     class Parser {
-        int rollbackIndex = 0;
-        int index = 0;
+        size_t rollbackIndex = 0;
+        size_t index = 0;
         std::string text;
 
-        int selectIndex = 0;
+        size_t selectIndex = 0;
 
-        bool end(int offset = 0);
+        bool end(size_t offset = 0);
         bool strong(char c);
         void push();
 
@@ -21,16 +21,16 @@ namespace langutil {
 
         static std::vector<char> defaultSymbols();
 
-        int getIndex();
-        std::string getText();
+        std::string content();
 
-        bool empty(int offset = 0);
+        bool empty(size_t offset = 0);
 
         void rollback();
 
-        void select();
+        size_t select();
         std::string clip();
         void back();
+        void jump(size_t offset);
 
         std::string last();
         std::string next();

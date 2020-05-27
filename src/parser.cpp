@@ -38,7 +38,7 @@ namespace langutil {
         };
     }
 
-    bool Parser::end(int offset) {
+    bool Parser::end(size_t offset) {
         return index + offset >= text.length();
     }
 
@@ -54,15 +54,11 @@ namespace langutil {
             while (!end() && std::isspace(text[index])) { index++; }
     }
 
-    int Parser::getIndex() {
-        return index;
-    }
-
-    std::string Parser::getText() {
+    std::string Parser::content() {
         return text;
     }
 
-    bool Parser::empty(int offset) {
+    bool Parser::empty(size_t offset) {
         push();
         return end(offset);
     }
@@ -71,8 +67,10 @@ namespace langutil {
         index = rollbackIndex;
     }
 
-    void Parser::select() {
+    size_t Parser::select() {
         selectIndex = index;
+
+        return index;
     }
 
     std::string Parser::clip() {
@@ -81,6 +79,10 @@ namespace langutil {
 
     void Parser::back() {
         index = selectIndex;
+    }
+
+    void Parser::jump(size_t offset) {
+        index = offset;
     }
 
     std::string Parser::last() {
