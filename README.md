@@ -1,5 +1,4 @@
 # langutil by desgroup
-The need for a good parser is obvious in any language project.
 This parser has its roots a few years ago when I begun making languages.
 However, as time has gone by I have found that this parser (and some other classes) were a constant in almost any project I worked on.
 
